@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Birthday;
 use App\Models\Plantilla;
+use App\Models\SendBirthday;
 use App\Traits\SendEmail;
 use Illuminate\Console\Command;
 
@@ -44,10 +45,23 @@ class SendEmailBirthdays extends Command
         $today_day =  date('d');
         $today_month =  date('m');
         $plantilla = Plantilla::find(1);
-         $birthdays = Birthday::where('day',(int)$today_day)->where('month',(int)$today_month)->get();
-         foreach($birthdays as $birthday){
-             strtolower($birthday->email);
-             $this->send_email($plantilla->ide,$birthday->name.$plantilla->subject,$birthday->name,strtolower($birthday->email));
-         }
+        $birthdays = Birthday::where('day',(int)$today_day)->where('month',(int)$today_month)->get();
+        foreach($birthdays as $birthday){
+            strtolower($birthday->email);
+            try {
+                $this->send_email($plantilla->ide,$birthday->name.$plantilla->subject,$birthday->name,strtolower($birthday->email));
+                $send_aniversary = new SendBirthday();
+                $send_aniversary->email = strtolower($birthday->email);
+                $send_aniversary->status = 'success';
+                $send_aniversary->save();
+
+            } catch (\Throwable $th) {
+                $send_aniversary = new SendBirthday();
+                $send_aniversary->email = strtolower($birthday->email);
+                $send_aniversary->status = 'error';
+                $send_aniversary->save();
+            }
+            
+        }
     }
 }

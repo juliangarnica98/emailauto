@@ -17,6 +17,7 @@ class CreateSendBirthdaysTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('email');
+            $table->string('status');
         });
     }
 

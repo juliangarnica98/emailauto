@@ -20,8 +20,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('birthday:send')->everyMinute('8:15');
         // $schedule->command('anniversary:send')->everyMinute('8:30');
 
-        $schedule->command('birthday:send')->dailyAt('8:15');
-        $schedule->command('send:anniversary')->dailyAt('8:30');
+        $schedule->command('send:birthday')->dailyAt('12:30');
+        $schedule->command('send:anniversary')->dailyAt('12:31');
     }
 
     /**

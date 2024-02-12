@@ -37,7 +37,7 @@ class HomeController extends Controller
             DB::beginTransaction();
             try {
                 UpdateAnniversary::create(['date'=>date('Y-m-d')]);
-                DB::table('birthdays')->truncate();
+                DB::table('anniversaries')->truncate();
                 Excel::import(new AnniversaryImport,$file);
                 DB::commit();
             } catch (\Exception $e) {
