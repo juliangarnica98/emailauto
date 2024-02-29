@@ -11,7 +11,8 @@ trait SendEmail{
             "Subject" => $subject,
             "From" => [
                 "Name" => config('app.sendmail_name'),
-                "Email" => config('app.sendmail_email')
+                // "Email" => config('app.sendmail_email')
+                "Email" => 'comunicacion.interna@fastmoda.com.co'
             ],
             "To" => array([
                 "Name" => $name,
