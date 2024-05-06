@@ -17,14 +17,12 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('birthday:send')->everyMinute('8:15');
-        // $schedule->command('anniversary:send')->everyMinute('8:30');
 
-        $schedule->command('send:birthday')->dailyAt('8:30');
-        $schedule->command('send:anniversary')->dailyAt('8:35');
 
-        //$schedule->command('send:birthday')->everyFifteenMinutes();
-        //$schedule->command('send:anniversary')->everyFifteenMinutes();
+        // $schedule->command('send:birthday')->dailyAt('8:30');
+        // $schedule->command('send:anniversary')->dailyAt('8:35');
+
+
     }
 
     /**

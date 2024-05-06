@@ -1,48 +1,48 @@
 <?php
 
 namespace App\Traits;
+
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Http;
 
 trait SendEmail{
 
-    public function send_email($ide,$subject,$name,$email) {
-        $data = [
-            "TemplateId" => (int)$ide,
-            "Subject" => $subject,
-            "From" => [
-                "Name" => config('app.sendmail_name'),
-                // "Email" => config('app.sendmail_email')
-                "Email" => 'comunicacion.interna@fastmoda.com.co'
-            ],
-            "To" => array([
-                "Name" => $name,
-                "Email" => $email
-            ]),
-            "Cc" => [],
-            "Bcc" => [],
-            "ReplyTo" => null,
-            "CharSet" => "utf-8",
-            "ExtendedHeaders" => null,
-            "Attachments" => null,
-            "EmbeddedImages" => null,
-            "XSmtpAPI" => [
-                "DynamicFields" => array(
-                    [
-                        "N" => "nombre",
-                        "V" => $name
-                    ],
-                )
-            ],
-            "SkipDynamicFields" => false,
-            "User" => [
-                "Username" => config('app.sendmail_user'),
-                "Secret" => config('app.sendmail_secret')
-            ],
+    public function send_email($subject,$name,$email) {
+        $client = new \GuzzleHttp\Client();
+        $headers = [
+            'Authorization' => 'Basic TElMSVBJTksuTUFJTDpMaWxpcGluay4yMDIw'
         ];
-        $url = config('app.sendmail_url');
+        $options = [
+        'multipart' => [
+          [
+            'name' => 'from',
+            'contents' => 'comunicacion.interna@cartera.lilipink.net'
+          ],
+          [
+            'name' => 'to',
+            'contents' => $email
+          ],
+          [
+            'name' => 'subject',
+            'contents' => $subject
+          ],
+          [
+            'name' => 'text',
+            'contents' => $name
+            //'contents' => 'Lilipink & Yoi ON ¡Tu pagaré CrediPink ya está listo para firmar! Factura N°'
+          ],
+          [
+            'name' => 'html',
+            'contents' => '<h1>Html body</h1><p>Rich HTML message body.</p>'
+          ],
+          [
+            'name' => 'templateId',
+            'contents' => '200000000085107'
+          ],
+        ]];
+        $request = new Request('POST', 'http://api.messaging-service.com/email/3/send', $headers);
+        $res = $client->sendAsync($request, $options)->wait();
 
-        $dataResponse = Http::Post($url, $data)->json();
-
-        return $dataResponse;
+        return json_decode($res->getBody());
     }
 }

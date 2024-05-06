@@ -8,6 +8,7 @@ use App\Models\SendAnniversary;
 use App\Traits\SendEmail;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class SendEmailAnniversaries extends Command
 {
@@ -54,7 +55,7 @@ class SendEmailAnniversaries extends Command
                 $anios = $actual-$anniversary->year;
                 $plantilla= Plantilla::find($anios+1);
                 try {
-                    $this->send_email($plantilla->ide,$anniversary->name.$plantilla->subject,$anniversary->name,strtolower($anniversary->email));
+                    $this->send_email($anniversary->name.$plantilla->subject,$anniversary->name,strtolower($anniversary->email));
                     $send_aniversary = new SendAnniversary();
                     $send_aniversary->email = strtolower($anniversary->email);
                     $send_aniversary->status = 'success';
@@ -65,6 +66,8 @@ class SendEmailAnniversaries extends Command
                     $send_aniversary->email = strtolower($anniversary->email);
                     $send_aniversary->status = 'error';
                     $send_aniversary->save();
+                    Log::error($th->getMessage());
+                    
                 }
     
             }

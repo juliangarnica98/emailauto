@@ -34,4 +34,7 @@ Route::post('/file-import-birthday', [BirthdayController::class, 'import'])->nam
 Route::get('/send-birthday', [BirthdayController::class, 'send'])->name('send-birthday');
 Route::post('/file-import-anniversary', [HomeController::class, 'import'])->name('file-import-anniversary');
 Route::get('/send-anniversary', [HomeController::class, 'send'])->name('send-anniversary');
-// Route::get('/test', [BirthdayController::class, 'test']);
+
+Route::get('/pantillas', function () {
+    return view('emails.anniversary');
+});

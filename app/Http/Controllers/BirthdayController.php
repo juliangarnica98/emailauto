@@ -42,7 +42,7 @@ class BirthdayController extends Controller
                 Excel::import(new BirthdayImport,$file);
                 DB::commit();
             } catch (\Exception $e) {
-                //DB::rollback();
+                DB::rollback();
                 return back()->with('error');
             }
             return back()->with('success');

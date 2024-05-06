@@ -20,7 +20,7 @@ class CreatePlantillasTable extends Migration
             $table->string('subject');
             $table->string('description');
             $table->text('url');
-            $table->string('ide');
+      
         });
     }
 
