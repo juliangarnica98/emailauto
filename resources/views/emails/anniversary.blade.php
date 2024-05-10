@@ -26,9 +26,12 @@
         .number{
             font-size: 15rem;
             font-weight :10rem;
+            
             background: linear-gradient(#e6007e,#6561A9);
             -webkit-background-clip: text;
             color: transparent;  
+            font-weight: bold;
+            
         }
     </style>
 </head>

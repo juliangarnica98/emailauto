@@ -5,14 +5,13 @@ namespace App\Traits;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Http;
 
-trait SendEmail{
+trait SendEmailBirthday{
 
-    public function send_email($subject,$name,$email,$idtemplate, $anios) {
+    public function send_email($subject,$name,$email,$idtemplate) {
         $client = new \GuzzleHttp\Client();
         $headers = [
             'Authorization' => 'Basic TElMSVBJTksuTUFJTDpMaWxpcGluay4yMDIw'
         ];
-        $json = '{"type":"'.$anios.'"}';
         $options = [
         'multipart' => [
           [
@@ -40,10 +39,7 @@ trait SendEmail{
             'name' => 'templateId',
             'contents' => $idtemplate
           ],
-          [
-            'name' => 'defaultPlaceholders',
-            'contents' => $json
-          ],
+
         ]];
         $request = new Request('POST', 'http://api.messaging-service.com/email/3/send', $headers);
         $res = $client->sendAsync($request, $options)->wait();

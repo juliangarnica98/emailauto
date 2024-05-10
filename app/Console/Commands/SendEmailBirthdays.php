@@ -5,12 +5,12 @@ namespace App\Console\Commands;
 use App\Models\Birthday;
 use App\Models\Plantilla;
 use App\Models\SendBirthday;
-use App\Traits\SendEmail;
+use App\Traits\SendEmailBirthday;
 use Illuminate\Console\Command;
 
 class SendEmailBirthdays extends Command
 {
-    use SendEmail;
+    use SendEmailBirthday;
     /**
      * The name and signature of the console command.
      *
@@ -49,7 +49,7 @@ class SendEmailBirthdays extends Command
         foreach($birthdays as $birthday){
             strtolower($birthday->email);
             try {
-                $this->send_email($plantilla->ide,$birthday->name.$plantilla->subject,$birthday->name,strtolower($birthday->email));
+                $this->send_email($birthday->name.$plantilla->subject,$birthday->name,strtolower($birthday->email),'200000000085161');
                 $send_aniversary = new SendBirthday();
                 $send_aniversary->email = strtolower($birthday->email);
                 $send_aniversary->status = 'success';
