@@ -55,7 +55,7 @@ class SendEmailAnniversaries extends Command
                 $anios = $actual-$anniversary->year;
                 $plantilla= Plantilla::find($anios+1);
                 try {
-                    $this->send_email($anniversary->name.$plantilla->subject,$anniversary->name,strtolower($anniversary->email),'200000000085107','http://54.198.103.122/img/plantillas/'.$anios.'.jpg');
+                    $this->send_email($anniversary->name.$plantilla->subject,$anniversary->name,strtolower($anniversary->email),'200000000094159','http://54.198.103.122/img/plantillas/'.$anios.'.jpg');
                     $send_aniversary = new SendAnniversary();
                     $send_aniversary->email = strtolower($anniversary->email);
                     $send_aniversary->status = 'success';

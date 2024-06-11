@@ -9,15 +9,18 @@ trait SendEmail{
 
     public function send_email($subject,$name,$email,$idtemplate, $anios) {
         $client = new \GuzzleHttp\Client();
+        // $headers = [
+        //     'Authorization' => 'Basic TElMSVBJTksuTUFJTDpMaWxpcGluay4yMDIw'
+        // ];
         $headers = [
-            'Authorization' => 'Basic TElMSVBJTksuTUFJTDpMaWxpcGluay4yMDIw'
-        ];
+          'Authorization' => "Basic " . base64_encode("LILIPINK.GESTIONHUMANA:L1lipink.2024")
+      ];
         $json = '{"type":"'.$anios.'"}';
         $options = [
         'multipart' => [
           [
             'name' => 'from',
-            'contents' => 'comunicacion.interna@cartera.lilipink.net'
+            'contents' => 'comunicacion.interna@liligestionhimana.com'
           ],
           [
             'name' => 'to',

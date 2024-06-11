@@ -49,7 +49,7 @@ class SendEmailBirthdays extends Command
         foreach($birthdays as $birthday){
             strtolower($birthday->email);
             try {
-                $this->send_email($birthday->name.$plantilla->subject,$birthday->name,strtolower($birthday->email),'200000000085161');
+                $this->send_email($birthday->name.$plantilla->subject,$birthday->name,strtolower($birthday->email),'200000000094162');
                 $send_aniversary = new SendBirthday();
                 $send_aniversary->email = strtolower($birthday->email);
                 $send_aniversary->status = 'success';

@@ -9,9 +9,12 @@ trait SendEmailBirthday{
 
     public function send_email($subject,$name,$email,$idtemplate) {
         $client = new \GuzzleHttp\Client();
+        // $headers = [
+        //     'Authorization' => 'Basic TElMSVBJTksuTUFJTDpMaWxpcGluay4yMDIw'
+        // ];
         $headers = [
-            'Authorization' => 'Basic TElMSVBJTksuTUFJTDpMaWxpcGluay4yMDIw'
-        ];
+          'Authorization' => "Basic " . base64_encode("LILIPINK.GESTIONHUMANA:L1lipink.2024")
+      ];
         $options = [
         'multipart' => [
           [
