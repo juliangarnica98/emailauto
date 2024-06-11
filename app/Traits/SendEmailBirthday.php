@@ -19,7 +19,7 @@ trait SendEmailBirthday{
         'multipart' => [
           [
             'name' => 'from',
-            'contents' => 'comunicacion.interna@cartera.lilipink.net'
+            'contents' => 'comunicacion.interna@liligestionhumana.com'
           ],
           [
             'name' => 'to',

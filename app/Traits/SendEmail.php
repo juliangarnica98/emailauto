@@ -20,7 +20,7 @@ trait SendEmail{
         'multipart' => [
           [
             'name' => 'from',
-            'contents' => 'comunicacion.interna@liligestionhimana.com'
+            'contents' => 'comunicacion.interna@liligestionhumana.com'
           ],
           [
             'name' => 'to',

@@ -7,6 +7,7 @@ use App\Models\Plantilla;
 use App\Models\SendBirthday;
 use App\Traits\SendEmailBirthday;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class SendEmailBirthdays extends Command
 {
@@ -56,6 +57,7 @@ class SendEmailBirthdays extends Command
                 $send_aniversary->save();
 
             } catch (\Throwable $th) {
+                Log::error($th);
                 $send_aniversary = new SendBirthday();
                 $send_aniversary->email = strtolower($birthday->email);
                 $send_aniversary->status = 'error';
