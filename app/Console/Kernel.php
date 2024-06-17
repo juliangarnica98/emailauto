@@ -19,8 +19,8 @@ class Kernel extends ConsoleKernel
     {
 
 
-        // $schedule->command('send:birthday')->dailyAt('8:30');
-        // $schedule->command('send:anniversary')->dailyAt('8:35');
+        $schedule->command('send:birthday')->dailyAt('8:30');
+        $schedule->command('send:anniversary')->dailyAt('8:35');
 
 
     }
