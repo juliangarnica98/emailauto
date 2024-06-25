@@ -8,8 +8,10 @@ use App\Models\Plantilla;
 use App\Models\SendBirthday;
 use App\Models\UpdateBirthday;
 use App\Traits\SendEmail;
+use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Reader\Xls\RC4;
 
@@ -35,16 +37,21 @@ class BirthdayController extends Controller
         
         $file = $request->file('file');
         if($file != null){
-            DB::beginTransaction();
+            // DB::beginTransaction();
+            // try {
             try {
                 UpdateBirthday::create(['date'=>date('Y-m-d')]);
                 DB::table('birthdays')->truncate();
                 Excel::import(new BirthdayImport,$file);
-                DB::commit();
-            } catch (\Exception $e) {
-                DB::rollback();
+            } catch (\Throwable $th) {
                 return back()->with('error');
             }
+                // DB::commit();
+            // } catch (\Exception $e) {
+            //     DB::rollback();
+            //     return back()->with('error');
+            //     Log::error($e);
+            // }
             return back()->with('success');
         }
         return back()->with('error');
