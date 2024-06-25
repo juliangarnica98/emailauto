@@ -37,21 +37,19 @@ class BirthdayController extends Controller
         
         $file = $request->file('file');
         if($file != null){
-            // DB::beginTransaction();
-            // try {
+            DB::beginTransaction();
             try {
+            
                 UpdateBirthday::create(['date'=>date('Y-m-d')]);
                 DB::table('birthdays')->truncate();
                 Excel::import(new BirthdayImport,$file);
-            } catch (\Throwable $th) {
+            
+                DB::commit();
+            } catch (\Exception $e) {
+                DB::rollback();
                 return back()->with('error');
+                Log::error($e);
             }
-                // DB::commit();
-            // } catch (\Exception $e) {
-            //     DB::rollback();
-            //     return back()->with('error');
-            //     Log::error($e);
-            // }
             return back()->with('success');
         }
         return back()->with('error');
