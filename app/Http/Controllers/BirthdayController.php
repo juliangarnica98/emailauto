@@ -43,10 +43,9 @@ class BirthdayController extends Controller
                 UpdateBirthday::create(['date'=>date('Y-m-d')]);
                 DB::table('birthdays')->truncate();
                 Excel::import(new BirthdayImport,$file);
-            
                 DB::commit();
             } catch (\Exception $e) {
-                DB::rollback();
+                //DB::rollback();
                 return back()->with('error');
                 Log::error($e);
             }
